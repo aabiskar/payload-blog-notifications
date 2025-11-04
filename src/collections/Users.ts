@@ -7,7 +7,12 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: 'subscribedTags',
+      type: 'relationship',
+      relationTo: 'tags',
+      hasMany: true,
+      label: 'Subscribed Tags',
+    },
   ],
 }
