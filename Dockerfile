@@ -60,11 +60,20 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Install RabbitMQ
+RUN apk add --no-cache socat erlang-nox wget tar xz && \
+    wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.3/rabbitmq-server-generic-unix-3.12.3.tar.xz && \
+    tar -xf rabbitmq-server-generic-unix-3.12.3.tar.xz -C /usr/local/ && \
+    mv /usr/local/rabbitmq_server-3.12.3 /usr/local/rabbitmq && \
+    rm rabbitmq-server-generic-unix-3.12.3.tar.xz
+
+ENV PATH="/usr/local/rabbitmq/sbin:${PATH}"
+
 USER nextjs
 
-EXPOSE 3000
+EXPOSE 3000 5672 15672
 
-ENV PORT 3000
+ENV PORT 3000 
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output

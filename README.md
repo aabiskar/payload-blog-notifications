@@ -52,6 +52,32 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
 
   This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
 
+-  #### Blogs & Notifications
+
+  This project includes a **blog system with tag-based subscriptions**:
+
+  - When a new blog is created, the system checks for users subscribed to the tags of that blog.  
+  - All subscribed users automatically receive an **email notification** about the new blog.  
+  - This allows you to implement a subscription-based notification system with minimal setup.
+
+  > You can extend the system to support more advanced email templates, scheduled digests, or custom notification workflows.
+
+-  ### 📊 Blog Notification Workflow
+New Blog Created
+        │
+        ▼
+ Check Blog Tags
+        │
+        ▼
+ Find Users Subscribed to Tags
+        │
+        ▼
+  Send Email Notifications
+        │
+        ▼
+Users Receive Notification
+
+
 ### Docker
 
 Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
